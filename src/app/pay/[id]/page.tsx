@@ -13,6 +13,7 @@ const PayPage = ({ params }: { params: { id: string } }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   const { id } = params;
+  console.log(id)
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -23,7 +24,8 @@ const PayPage = ({ params }: { params: { id: string } }) => {
             method: "POST",
           }
         );
-        const data = await res.json();
+        const data =await res.json();
+        console.log(data)
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.log(err);

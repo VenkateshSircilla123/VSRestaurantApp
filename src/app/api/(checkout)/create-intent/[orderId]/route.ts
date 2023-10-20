@@ -8,34 +8,42 @@ export async function POST(
   { params }: { params: { orderId: string } }
 ) {
   const { orderId } = params;
+  console.log("order", orderId)
 
   const order = await prisma.order.findUnique({
     where: {
       id: orderId,
     },
   });
+  // console.log(order)
 
   if (order) {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: order.price,
-      currency: "usd",
-      automatic_payment_methods: {
-        enabled: true,
-      },
-    });
-    console.log(paymentIntent.id)
-
-    await prisma.order.update({
-      where: {
-        id: orderId,
-      },
-      data: { intent_id: paymentIntent.id },
-    });
-
-    return new NextResponse(
-      JSON.stringify({ clientSecret: paymentIntent.client_secret }),
-      { status: 200 }
-    );
+    try {
+      
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: 100,
+        currency: "usd",
+        automatic_payment_methods: {
+          enabled: true,
+        },
+      });
+      console.log(paymentIntent)
+  
+      await prisma.order.update({
+        where: {
+          id: orderId,
+        },
+        data: { intent_id: paymentIntent.id },
+      });
+  
+      return new NextResponse(
+        JSON.stringify({ clientSecret: paymentIntent.client_secret }),
+        { status: 200 }
+      );
+    } catch (error) {
+      console.log('venky something wrong')
+      
+    }
   }
   return new NextResponse(
     JSON.stringify({ message:"Order not found!" }),
