@@ -13,7 +13,7 @@ const SuccessPage = () => {
     useEffect(() => {
       const makeRequest = async () => {
         try {
-          await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
+          await fetch(`https://vs-restaurant-app.vercel.app/api/confirm/${payment_intent}`, {
             method: "PUT",
           });
           setTimeout(() => {
