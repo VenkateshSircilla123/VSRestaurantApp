@@ -5,9 +5,10 @@ import React, { useEffect } from "react";
 // import ConfettiExplosion from "react-confetti-explosion";
 
 const SuccessPage = () => {
-  try {
+  const [searchParams] = useSearchParams();
+  
     const router = useRouter();
-    const [searchParams] = useSearchParams();
+    
     const payment_intent = searchParams.get("payment_intent");
   
     useEffect(() => {
@@ -39,11 +40,7 @@ const SuccessPage = () => {
         </div>
       </>
     );
-    
-  } catch (error) {
-    console.log(error)
-    return <ErrorPage />
-  }
+ 
 };
 
 export default SuccessPage;
