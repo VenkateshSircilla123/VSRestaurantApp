@@ -5,16 +5,15 @@ import React, { useEffect } from "react";
 // import ConfettiExplosion from "react-confetti-explosion";
 
 const SuccessPage = () => {
-  const [searchParams] = useSearchParams();
-  
+  try {
     const router = useRouter();
-    
+    const searchParams = useSearchParams()!;
     const payment_intent = searchParams.get("payment_intent");
   
     useEffect(() => {
       const makeRequest = async () => {
         try {
-          await fetch(`https://vs-restaurant-app.vercel.app/api/confirm/${payment_intent}`, {
+          await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
             method: "PUT",
           });
           setTimeout(() => {
@@ -40,7 +39,11 @@ const SuccessPage = () => {
         </div>
       </>
     );
- 
+    
+  } catch (error) {
+    console.log(error)
+    return <ErrorPage />
+  }
 };
 
 export default SuccessPage;
