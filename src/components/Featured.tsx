@@ -5,17 +5,21 @@ import Link from "next/link";
 
 import React from "react";
 
+const getData = async () => {
+  const res = await fetch("http://localhost:3000/api/products", {
+    cache: "no-store",
+  });
+  // console.log(res.json());
 
-const getData = async ()=>{
-  const res = await fetch('http://localhost:3000/api/products', {cache:"no-store"})
-  if(!res.ok){
-    return new Error('failed!')
+  if (!res.ok) {
+    return new Error("failed!");
   }
-  return res.json()
-}
+  return res.json();
+};
 
 const Featured = async () => {
-  const featuredProducts : Product[] = await getData()
+  const featuredProducts: Product[] = await getData();
+  // console.log(featuredProducts);
   return (
     <div className="w-screen z-50 overflow-x-scroll text-red-500">
       {/* WRAPPER */}
@@ -35,7 +39,9 @@ const Featured = async () => {
             )}
             {/* TEXT CONTAINER */}
             <div className=" flex-1 flex flex-col items-center justify-center text-center gap-4">
-              <h1 className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl">{item.title}</h1>
+              <h1 className="text-xl font-bold uppercase xl:text-2xl 2xl:text-3xl z-[1]">
+                {item.title}
+              </h1>
               <p className="p-4 2xl:p-8">{item.desc}</p>
               <span className="text-xl font-bold">${item.price}</span>
               <button className="bg-red-500 text-white p-2 rounded-md">

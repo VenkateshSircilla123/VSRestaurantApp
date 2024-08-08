@@ -10,7 +10,7 @@ const nextConfig = {
           headers : [
             {
               key: 'Content-Security-Policy',
-              value: "img-src 'self' https://*.stripe.com; frame-src https://connect-js.stripe.com https://checkout.stripe.com https://js.stripe.com;"
+              value: ""
             }
           ]
         }

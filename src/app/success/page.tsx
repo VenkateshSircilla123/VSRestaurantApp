@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 const SuccessPage = () => {
   try {
     const router = useRouter();
-    const searchParams = useSearchParams();
+    const searchParams = useSearchParams()!;
     const payment_intent = searchParams.get("payment_intent");
   
     useEffect(() => {
