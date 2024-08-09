@@ -25,13 +25,13 @@ const CartPage = () => {
           body: JSON.stringify({
             price: totalPrice,
             products,
-            status: "Being Prepared!..",
+            status: "Not Paid!",
             userEmail: session.user.email,
           }),
         });
         const data = await res.json();
-        router.push(`/success`);
-        // router.push(`/pay/${data.id}`);
+        // router.push(`/success`);
+        router.push(`/pay/${data.id}`);
       } catch (err) {
         console.log(err);
       }
