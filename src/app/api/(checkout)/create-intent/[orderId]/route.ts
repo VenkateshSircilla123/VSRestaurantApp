@@ -8,7 +8,7 @@ export async function POST(
   { params }: { params: { orderId: string } }
 ) {
   const { orderId } = params;
-  console.log("order", orderId);
+  // console.log("order", orderId);
 
   const order = await prisma.order.findUnique({
     where: {
@@ -23,21 +23,11 @@ export async function POST(
         amount: 100,
         description: "this is payment intent",
         currency: "usd",
-        shipping: {
-          name: "Jenny Rosen",
-          address: {
-            line1: "510 Townsend St",
-            postal_code: "98140",
-            city: "San Francisco",
-            state: "CA",
-            country: "US",
-          },
-        },
         automatic_payment_methods: {
           enabled: true,
         },
       });
-      console.log(paymentIntent);
+      console.log(paymentIntent.client_secret);
 
       await prisma.order.update({
         where: {

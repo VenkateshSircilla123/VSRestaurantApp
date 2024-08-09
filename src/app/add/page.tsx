@@ -62,22 +62,28 @@ const AddPage = () => {
     const item = (target.files as FileList)[0];
     setFile(item);
   };
-  
 
   const upload = async () => {
     const data = new FormData();
     data.append("file", file!);
     data.append("upload_preset", "restaurent");
 
-    const res = await fetch("https://api.cloudinary.com/v1_1/venky756/image", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "multipart/form-data" },
-      body: data,
-    });
-    
-    const resData = await res.json();
-    return resData.url;
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/venky756/image",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "multipart/form-data" },
+          body: data,
+        }
+      );
+
+      const resData = await res.json();
+      return resData.url;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,7 +91,7 @@ const AddPage = () => {
 
     try {
       // const url = await upload();
-      const res = await fetch("http://localhost:3000/api/products", {
+      const res = await fetch("/api/products", {
         method: "POST",
         body: JSON.stringify({
           // img: url,
@@ -134,7 +140,7 @@ const AddPage = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label className ="text-sm">Description</label>
+          <label className="text-sm">Description</label>
           <textarea
             rows={3}
             className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"

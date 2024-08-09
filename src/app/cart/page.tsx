@@ -19,7 +19,7 @@ const CartPage = () => {
       router.push("/login");
     } else {
       try {
-        const res = await fetch("http://localhost:3000/api/orders", {
+        const res = await fetch("/api/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -30,8 +30,8 @@ const CartPage = () => {
           }),
         });
         const data = await res.json();
-        router.push(`/success`);
-        // router.push(`/pay/${data.id}`)
+        // router.push(`/success`);
+        router.push(`/pay/${data.id}`);
       } catch (err) {
         console.log(err);
       }

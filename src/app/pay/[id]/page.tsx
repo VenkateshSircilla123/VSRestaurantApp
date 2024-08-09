@@ -13,19 +13,16 @@ const PayPage = ({ params }: { params: { id: string } }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   const { id } = params;
-  console.log(id)
+  console.log(id);
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/create-intent/${id}`,
-          {
-            method: "POST",
-          }
-        );
-        const data =await res.json();
-        console.log(data)
+        const res = await fetch(`/api/create-intent/${id}`, {
+          method: "POST",
+        });
+        const data = await res.json();
+        console.log(data);
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.log(err);
@@ -35,12 +32,12 @@ const PayPage = ({ params }: { params: { id: string } }) => {
     makeRequest();
   }, [id]);
 
-  const options:StripeElementsOptions={
+  const options: StripeElementsOptions = {
     clientSecret,
-    appearance:{
-      theme:"stripe"
-    }
-  }
+    appearance: {
+      theme: "stripe",
+    },
+  };
 
   return (
     <div>
