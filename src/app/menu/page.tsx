@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 const getData = async () => {
-  const res = await fetch("/api/categories", {
+  const res = await fetch(`${process.env.baseURL}/api/categories`, {
     cache: "no-store",
   });
   if (!res.ok) {

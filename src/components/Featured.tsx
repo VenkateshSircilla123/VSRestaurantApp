@@ -6,7 +6,7 @@ import Link from "next/link";
 import React from "react";
 
 const getData = async () => {
-  const res = await fetch("/api/products", {
+  const res = await fetch(`${process.env.baseURL}/api/products`, {
     cache: "no-store",
   });
   // console.log(res.json());
@@ -20,7 +20,7 @@ const getData = async () => {
 const Featured = async () => {
   try {
     const featuredProducts: Product[] = await getData();
-    // console.log(featuredProducts);
+    console.log(featuredProducts);
     return (
       <div className="w-screen z-50 overflow-x-scroll text-red-500">
         {/* WRAPPER */}

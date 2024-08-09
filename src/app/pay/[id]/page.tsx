@@ -18,9 +18,12 @@ const PayPage = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await fetch(`/api/create-intent/${id}`, {
-          method: "POST",
-        });
+        const res = await fetch(
+          `${process.env.baseURL}/api/create-intent/${id}`,
+          {
+            method: "POST",
+          }
+        );
         const data = await res.json();
         console.log(data);
         setClientSecret(data.clientSecret);
