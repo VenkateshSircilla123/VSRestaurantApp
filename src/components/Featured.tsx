@@ -35,7 +35,7 @@ const Featured = async () => {
               >
                 {/* IMAGE CONTAINER */}
                 {item.img && (
-                  <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
+                  <div className="relative flex-1 w-full hover:rotate-[60deg] mix-blend-multiply transition-all duration-500">
                     <Image
                       src={item.img}
                       alt=""

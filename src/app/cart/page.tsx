@@ -19,13 +19,13 @@ const CartPage = () => {
       router.push("/login");
     } else {
       try {
-        const res = await fetch(`${process.env.baseURL}/api/orders`, {
+        const res = await fetch(`/api/orders`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             price: totalPrice,
             products,
-            status: "Not Paid!",
+            status: "Being prepared!",
             userEmail: session.user.email,
           }),
         });
