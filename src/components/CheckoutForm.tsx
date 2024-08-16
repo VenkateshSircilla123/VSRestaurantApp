@@ -63,7 +63,7 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "/success",
+        return_url: "https://vs-restaurant-app.vercel.app/success",
       },
     });
 
@@ -78,6 +78,7 @@ const CheckoutForm = () => {
       setMessage("An unexpected error occurred.");
     }
 
+    console.log(error);
     setIsLoading(false);
   };
 

@@ -19,8 +19,7 @@ const OrdersPage = () => {
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
-    queryFn: () =>
-      fetch(`${process.env.baseURL}/api/orders`).then((res) => res.json()),
+    queryFn: () => fetch(`/api/orders`).then((res) => res.json()),
   });
 
   const queryClient = useQueryClient();
