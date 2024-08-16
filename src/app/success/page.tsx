@@ -1,5 +1,6 @@
 "use client";
 import ErrorPage from "@/components/ErrorPage";
+import { useCartStore } from "@/utils/store";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 // import ConfettiExplosion from "react-confetti-explosion";
@@ -9,6 +10,11 @@ const SuccessPage = () => {
     const router = useRouter();
     const searchParams = useSearchParams()!;
     const payment_intent = searchParams.get("payment_intent");
+    const { clearCart } = useCartStore();
+
+    useEffect(() => {
+      useCartStore.persist.rehydrate();
+    }, []);
 
     useEffect(() => {
       const makeRequest = async () => {
@@ -17,6 +23,7 @@ const SuccessPage = () => {
             method: "PUT",
           });
           setTimeout(() => {
+            clearCart();
             router.push("/orders");
           }, 5000);
         } catch (err) {
